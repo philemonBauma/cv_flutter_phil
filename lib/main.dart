@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const _ink = Color(0xFF17242C);
 const _muted = Color(0xFF718087);
@@ -370,17 +371,14 @@ class CvPage extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const ProfilePhoto(
-                    imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=240&h=240&fit=crop&crop=faces',
-                    size: 76,
-                  ),
+                  const ProfilePhoto(size: 76),
                   const SizedBox(width: 16),
                   const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Nora Diallo',
+                          'Lukoo Bauma Meshack',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w800,
@@ -418,7 +416,7 @@ class CvPage extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  _DarkTag(label: 'Paris, France'),
+                  _DarkTag(label: 'Goma, RDC'),
                   _DarkTag(label: 'Disponible'),
                 ],
               ),
@@ -431,7 +429,7 @@ class CvPage extends StatelessWidget {
         const TimelineCard(
           period: '2021 — 2024',
           title: 'Licence informatique',
-          subtitle: 'Université de Paris · Développement logiciel',
+          subtitle: 'Formation en développement logiciel · Goma',
         ),
         const SizedBox(height: 24),
         const SectionHeading(title: 'Expériences', trailing: '02'),
@@ -525,31 +523,27 @@ class FamilyPage extends StatelessWidget {
 
   static const _members = [
     FamilyMember(
-      name: 'Aïssatou Diallo',
+      name: 'Aïssatou Bauma',
       relation: 'Maman',
       profession: 'Enseignante',
-      imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=240&h=240&fit=crop&crop=faces',
       color: Color(0xFFDCECE4),
     ),
     FamilyMember(
-      name: 'Mamadou Diallo',
+      name: 'Mamadou Bauma',
       relation: 'Papa',
       profession: 'Ingénieur',
-      imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=240&h=240&fit=crop&crop=faces',
       color: Color(0xFFE9E6DA),
     ),
     FamilyMember(
-      name: 'Lina Diallo',
+      name: 'Lina Bauma',
       relation: 'Petite sœur',
       profession: 'Étudiante en design',
-      imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=240&h=240&fit=crop&crop=faces',
       color: Color(0xFFF1E2DC),
     ),
     FamilyMember(
-      name: 'Ibrahim Diallo',
+      name: 'Ibrahim Bauma',
       relation: 'Grand frère',
       profession: 'Entrepreneur',
-      imageUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=240&h=240&fit=crop&crop=faces',
       color: Color(0xFFE4E6F0),
     ),
   ];
@@ -597,14 +591,12 @@ class FamilyMember {
     required this.name,
     required this.relation,
     required this.profession,
-    required this.imageUrl,
     required this.color,
   });
 
   final String name;
   final String relation;
   final String profession;
-  final String imageUrl;
   final Color color;
 }
 
@@ -618,11 +610,7 @@ class FamilyCard extends StatelessWidget {
     return InfoCard(
       child: Row(
         children: [
-          ProfilePhoto(
-            imageUrl: member.imageUrl,
-            size: 64,
-            backgroundColor: member.color,
-          ),
+          ProfilePhoto(size: 64, backgroundColor: member.color),
           const SizedBox(width: 15),
           Expanded(
             child: Column(
@@ -706,19 +694,22 @@ class ContactPage extends StatelessWidget {
         const ContactCard(
           icon: Icons.phone_outlined,
           label: 'TÉLÉPHONE',
-          value: '+33 6 12 34 56 78',
+          value: '+243 000 000 000',
+          uri: 'tel:+243000000000',
         ),
         const SizedBox(height: 10),
         const ContactCard(
           icon: Icons.mail_outline_rounded,
           label: 'E-MAIL',
-          value: 'nora.diallo@example.com',
+          value: 'lukoo.bauma.meshack@example.com',
+          uri: 'mailto:lukoo.bauma.meshack@example.com',
         ),
         const SizedBox(height: 10),
         const ContactCard(
           icon: Icons.location_on_outlined,
           label: 'ADRESSE',
-          value: 'Paris, France',
+          value: 'Goma, RDC',
+          uri: 'https://www.google.com/maps/search/?api=1&query=Goma%2C%20RDC',
         ),
         const SizedBox(height: 24),
         const SectionHeading(title: 'Retrouvez-moi en ligne', trailing: '02'),
@@ -726,13 +717,15 @@ class ContactPage extends StatelessWidget {
         const ContactCard(
           icon: Icons.work_outline_rounded,
           label: 'LINKEDIN',
-          value: 'linkedin.com/in/nora-diallo',
+          value: 'linkedin.com/in/lukoo-bauma-meshack',
+          uri: 'https://linkedin.com/in/lukoo-bauma-meshack',
         ),
         const SizedBox(height: 10),
         const ContactCard(
           icon: Icons.code_rounded,
           label: 'GITHUB',
-          value: 'github.com/noradiallo',
+          value: 'github.com/lukoobaumameshack',
+          uri: 'https://github.com/lukoobaumameshack',
         ),
         const SizedBox(height: 18),
         const Text(
@@ -750,54 +743,61 @@ class ContactCard extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.value,
+    required this.uri,
     super.key,
   });
 
   final IconData icon;
   final String label;
   final String value;
+  final String uri;
 
   @override
   Widget build(BuildContext context) {
-    return InfoCard(
-      child: Row(
-        children: [
-          Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(
-              color: const Color(0xFFE9F0EA),
-              borderRadius: BorderRadius.circular(13),
+    return InkWell(
+      onTap: () =>
+          launchUrl(Uri.parse(uri), mode: LaunchMode.externalApplication),
+      borderRadius: BorderRadius.circular(18),
+      child: InfoCard(
+        child: Row(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE9F0EA),
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: Icon(icon, color: _green, size: 20),
             ),
-            child: Icon(icon, color: _green, size: 20),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: const TextStyle(
-                    color: _muted,
-                    fontSize: 9,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 1.2,
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      color: _muted,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.2,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  value,
-                  style: const TextStyle(
-                    color: _ink,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
+                  const SizedBox(height: 5),
+                  Text(
+                    value,
+                    style: const TextStyle(
+                      color: _ink,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -805,13 +805,11 @@ class ContactCard extends StatelessWidget {
 
 class ProfilePhoto extends StatelessWidget {
   const ProfilePhoto({
-    required this.imageUrl,
     required this.size,
     this.backgroundColor = const Color(0xFFDCECE4),
     super.key,
   });
 
-  final String imageUrl;
   final double size;
   final Color backgroundColor;
 
@@ -821,8 +819,8 @@ class ProfilePhoto extends StatelessWidget {
       radius: size / 2,
       backgroundColor: backgroundColor,
       child: ClipOval(
-        child: Image.network(
-          imageUrl,
+        child: Image.asset(
+          'web/Lukoo_Bauma_Meshack.JPG',
           width: size,
           height: size,
           fit: BoxFit.cover,

@@ -35,11 +35,12 @@ void main() {
     await tester.tap(find.text('Famille').last);
     await tester.pump();
     expect(find.byKey(const Key('familyPage')), findsOneWidget);
-    expect(find.text('Aïssatou Diallo'), findsOneWidget);
+    expect(find.text('Aïssatou Bauma'), findsOneWidget);
 
     await tester.tap(find.text('Contact').last);
     await tester.pump();
     expect(find.byKey(const Key('contactPage')), findsOneWidget);
-    expect(find.text('nora.diallo@example.com'), findsOneWidget);
+    expect(find.text('lukoo.bauma.meshack@example.com'), findsOneWidget);
+    expect(find.text('Goma, RDC'), findsOneWidget);
   });
 }
