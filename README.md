@@ -4,6 +4,14 @@
 
 
 
+##La video est dans le projet sur cette addresse https://github.com/philemonBauma/cv_flutter_phil/blob/master/web/demonstrationApplication.mp4
+
+Mais les captures de CRUD sont ici
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6fc895df-a353-4a1b-a41d-6c2617a74c54" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/633de835-a299-44ed-a513-550e379185f2" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b18acb1f-57a3-4d11-9b41-812af484cb29" />
+
+
 
 
 
